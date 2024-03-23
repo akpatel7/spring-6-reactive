@@ -21,7 +21,7 @@ public class BeerController {
 
     @DeleteMapping(BEER_PATH_ID)
     Mono<ResponseEntity<Object>> deleteById(@PathVariable Integer beerId) {
-        return beerService.deleteBeerById(beerId).then(Mono.fromCallable(() -> ResponseEntity.ok().build()));
+        return beerService.deleteBeerById(beerId).thenReturn(ResponseEntity.noContent().build());
     }
 
     @PatchMapping(BEER_PATH_ID)

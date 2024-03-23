@@ -18,6 +18,11 @@ public class BeerController {
 
     private final BeerService beerService;
 
+    @DeleteMapping(BEER_PATH_ID)
+    Mono<ResponseEntity<Object>> deleteById(@PathVariable Integer beerId) {
+        return beerService.deleteBeerById(beerId).then(Mono.fromCallable(() -> ResponseEntity.ok().build()));
+    }
+
     @PatchMapping(BEER_PATH_ID)
     Mono<ResponseEntity<Void>> patchExistingBeer(@PathVariable Integer beerId,
                                                  @RequestBody BeerDTO beerDTO){
